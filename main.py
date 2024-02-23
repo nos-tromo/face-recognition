@@ -6,15 +6,18 @@ import cv2
 import face_recognition
 import urllib.request
 
+
 def current_time():
     now = datetime.datetime.now().replace(microsecond=0)
     return now
+
 
 def detect_faces(image):
     # Use face_recognition library for face detection
     face_locations = face_recognition.face_locations(image)
     faces = [(top, right, bottom, left) for top, right, bottom, left in face_locations]
     return faces
+
 
 def expand_bbox(image, bbox, factor=1.5):
     # Expand the bounding box dimensions by a certain factor
@@ -25,7 +28,8 @@ def expand_bbox(image, bbox, factor=1.5):
     expanded_right = min(image.shape[1], right + int(width * (factor - 1) / 2))
     expanded_bottom = min(image.shape[0], bottom + int(height * (factor - 1) / 2))
     expanded_left = max(0, left - int(width * (factor - 1) / 2))
-    return (expanded_top, expanded_right, expanded_bottom, expanded_left)
+    return expanded_top, expanded_right, expanded_bottom, expanded_left
+
 
 def are_faces_unique(new_faces, existing_faces, threshold=0.5, distance_threshold=100):
     if len(existing_faces) == 0:
@@ -55,6 +59,7 @@ def are_faces_unique(new_faces, existing_faces, threshold=0.5, distance_threshol
                     continue  # Consider the new face unique and continue checking other faces
 
     return True
+
 
 def split_video_into_frames(video_path, output_folder, thumbnail_size=(200, 200), bbox_expansion_factor=1.5, frames_to_skip=30):
     # Create output folder if it doesn't exist
@@ -121,6 +126,7 @@ def main():
     split_video_into_frames(video_path, output_folder, thumbnail_size, args.bbox_expansion_factor, args.frames_to_skip)
     print(f"Unique faces extracted and saved to '{output_folder}' folder.")
     print(f"Finished: {current_time()}.")
+
 
 if __name__ == "__main__":
     main()
