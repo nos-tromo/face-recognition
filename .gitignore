@@ -1,0 +1,16 @@
+# folders
+__pycache__/
+data/
+env/
+frames/
+lib/
+output/
+virtualenv/
+.idea
+.ipynb*
+
+# files
+.DS_Store
+*.db
+*.code-workspace
+*.html*
