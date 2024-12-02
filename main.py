@@ -31,7 +31,12 @@ def expand_bbox(image, bbox, factor=1.5):
     return expanded_top, expanded_right, expanded_bottom, expanded_left
 
 
-def are_faces_unique(new_faces, existing_faces, threshold=0.5, distance_threshold=100):
+def are_faces_unique(
+        new_faces,
+        existing_faces,
+        threshold=0.5,
+        distance_threshold=100
+):
     if len(existing_faces) == 0:
         return True
 
@@ -61,7 +66,13 @@ def are_faces_unique(new_faces, existing_faces, threshold=0.5, distance_threshol
     return True
 
 
-def split_video_into_frames(video_path, output_folder, thumbnail_size=(200, 200), bbox_expansion_factor=1.5, frames_to_skip=30):
+def split_video_into_frames(
+        video_path,
+        output_folder,
+        thumbnail_size=(200, 200),
+        bbox_expansion_factor=1.5,
+        frames_to_skip=30
+):
     # Create output folder if it doesn't exist
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
@@ -87,7 +98,8 @@ def split_video_into_frames(video_path, output_folder, thumbnail_size=(200, 200)
                     face_img = image[expanded_top:expanded_bottom, expanded_left:expanded_right]
                     # Resize the face image to a larger size
                     resized_face_img = cv2.resize(face_img, thumbnail_size)
-                    cv2.imwrite(os.path.join(output_folder, f"frame_{frame_index}_face_{len(unique_faces)}.jpg"), resized_face_img)
+                    cv2.imwrite(os.path.join(output_folder, f"frame_{frame_index}_face_{len(unique_faces)}.jpg"),
+                                resized_face_img)
 
                     unique_faces.append(face)
             count += 1  # Increment count for each processed frame
