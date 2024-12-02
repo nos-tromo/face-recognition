@@ -1,16 +1,30 @@
-# folders
-__pycache__/
+# all hidden files and directories
+.*
+!.gitignore
+!.python-version
+
+# directories
+__pycache__
 data/
-env/
-frames/
-lib/
 output/
-virtualenv/
-.idea
-.ipynb*
+uploads/
 
 # files
-.DS_Store
-*.db
 *.code-workspace
-*.html*
+*.db
+*.gguf
+*.in
+*.ipynb
+*.jpeg
+*.jpg
+*.json
+*.log
+*.mkv
+*.mp3
+*.mp4
+*.png
+*.sh
+*.sqbpro
+*.wav
+*.webm
+*.zip
